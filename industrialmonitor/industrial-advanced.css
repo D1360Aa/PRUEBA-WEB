@@ -1,0 +1,601 @@
+/* industrial-advanced.css - EXTENSIONES Y CORRECCIONES PARA TRANSICIONES */
+
+/* ------------------- NOTIFICACIONES MEJORADAS ------------------- */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 400px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    contain: content;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-success {
+    background-color: var(--success-color);
+    color: white;
+    border-left: 4px solid #059669;
+}
+
+.notification-error {
+    background-color: var(--danger-color);
+    color: white;
+    border-left: 4px solid #dc2626;
+}
+
+.notification-warning {
+    background-color: var(--warning-color);
+    color: var(--text-color);
+    border-left: 4px solid #d97706;
+}
+
+.notification-info {
+    background-color: var(--info-color);
+    color: white;
+    border-left: 4px solid #0284c7;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+/* Notificación crítica de alerta */
+.critical-alert-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, var(--danger-color), #dc2626);
+    color: white;
+    padding: 1rem;
+    z-index: 10000;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    contain: content;
+}
+
+.critical-alert-notification.show {
+    transform: translateY(0);
+}
+
+.critical-alert-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.critical-alert-content i {
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.critical-alert-content h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.critical-alert-content p {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+}
+
+.notification-dismiss {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.notification-dismiss:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ------------------- LOADER OPTIMIZADO ------------------- */
+.dashboard-loader {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: var(--footer-height);
+    background-color: rgba(var(--bg-color), 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    contain: strict;
+}
+
+.dashboard-loader.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.dashboard-loader p {
+    color: var(--text-secondary-color);
+    font-size: 0.9rem;
+}
+
+/* ------------------- CONEXIÓN OPTIMIZADA ------------------- */
+.connection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    contain: content;
+}
+
+.status-online {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-connecting {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    animation: pulse 2s infinite;
+}
+
+.status-offline {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--danger-color);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* ------------------- BADGES DE ALERTA MEJORADOS ------------------- */
+.alert-badge {
+    background-color: var(--danger-color);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.5rem;
+    min-width: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.alert-badge.critical {
+    background-color: var(--danger-color);
+    animation: pulse 1.5s infinite;
+}
+
+.alert-badge.warning {
+    background-color: var(--warning-color);
+    color: var(--text-color);
+}
+
+.alert-badge.normal {
+    background-color: var(--success-color);
+}
+
+/* ------------------- ANIMACIONES DE ENTRADA PARA CARDS ------------------- */
+.dashboard-grid > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dashboard-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-grid > *:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ------------------- ESTADOS DE GAUGE MEJORADOS ------------------- */
+.gauge-critical {
+    --gauge-color: var(--danger-color);
+}
+
+.gauge-warning {
+    --gauge-color: var(--warning-color);
+}
+
+.gauge-normal {
+    --gauge-color: var(--success-color);
+}
+
+/* ------------------- ERROR OVERLAY ------------------- */
+.error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 2rem;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    contain: strict;
+}
+
+.error-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.error-overlay h3 {
+    color: var(--danger-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.error-overlay p {
+    color: var(--text-secondary-color);
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+/* ------------------- MEJORAS DE ACCESIBILIDAD ------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .notification,
+    .critical-alert-notification,
+    .dashboard-loader,
+    .error-overlay {
+        transition: none !important;
+    }
+    
+    .critical-alert-content i {
+        animation: none !important;
+    }
+    
+    .alert-badge.critical {
+        animation: none !important;
+    }
+    
+    .loader-spinner {
+        animation: none !important;
+    }
+    
+    .dashboard-grid > * {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Focus styles para accesibilidad */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    :root {
+        --operator-bg: #000000;
+        --operator-panel: #111111;
+        --operator-text: #ffffff;
+        --supervisor-bg: #ffffff;
+        --supervisor-panel: #f0f0f0;
+        --supervisor-text: #000000;
+    }
+    
+    .card {
+        border: 2px solid var(--border-color);
+    }
+    
+    .notification,
+    .critical-alert-notification {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ------------------- MEJORAS PARA TRANSICIONES SUAVES ------------------- */
+
+/* Evitar saltos durante las transiciones */
+.page-transition-fix {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animación de entrada para contenido dinámico */
+.content-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.content-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Sombra dinámica para cards durante hover */
+.card {
+    position: relative;
+    z-index: 1;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+/* ------------------- FIX PARA MOBILE ------------------- */
+@media (max-width: 768px) {
+    .notification {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+        top: 1rem;
+    }
+    
+    .critical-alert-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .critical-alert-content i {
+        font-size: 1.5rem;
+    }
+    
+    .notification-dismiss {
+        align-self: flex-end;
+        margin-top: -2rem;
+    }
+    
+    .dashboard-loader {
+        top: 0;
+        bottom: 0;
+    }
+    
+    /* Desactivar animaciones de entrada en mobile */
+    .dashboard-grid > * {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ------------------- MEJORAS DE RENDIMIENTO ------------------- */
+.dashboard-grid {
+    contain: layout style;
+}
+
+.motor-panel {
+    contain: content;
+}
+
+/* Optimizar canvases */
+canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* ------------------- ESTILOS PARA ESTADOS DE CARGA ------------------- */
+.loading-state {
+    position: relative;
+    min-height: 200px;
+}
+
+.loading-state::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ------------------- TRANSICIONES PARA FORMULARIOS ------------------- */
+.form-group {
+    transition: all 0.3s ease;
+}
+
+.form-group.focused {
+    transform: translateY(-2px);
+}
+
+.form-group.error {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* ------------------- ANIMACIONES PARA ÍCONOS ------------------- */
+.icon-spin {
+    animation: spin 1s linear infinite;
+}
+
+.icon-pulse {
+    animation: pulse 2s infinite;
+}
+
+.icon-bounce {
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+/* ------------------- UTILIDADES DE ANIMACIÓN ------------------- */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+.duration-100 { animation-duration: 100ms; }
+.duration-200 { animation-duration: 200ms; }
+.duration-300 { animation-duration: 300ms; }
+.duration-400 { animation-duration: 400ms; }
+.duration-500 { animation-duration: 500ms; }
+
+/* ------------------- FIX PARA SAFARI ------------------- */
+@supports (-webkit-touch-callout: none) {
+    .page {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .card {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    #app-main {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ------------------- ESTILOS PARA MODALES Y OVERLAYS ------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--panel-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+}
